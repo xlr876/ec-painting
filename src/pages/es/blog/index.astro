@@ -4,6 +4,7 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import Banner from '../../../components/Banner.astro';
 import CTA from '../../../components/CTA.astro';
+import { withBase } from '../../../i18n/routing';
 import { getCollection } from 'astro:content';
 import { getBrand } from '../../../config/brand';
 import { getTranslations } from '../../../i18n/translations';
@@ -33,7 +34,7 @@ const text = getTranslations('es');
                     {post.data.tags.length > 0 && <><span aria-hidden="true">&bull;</span><span>{post.data.tags[0]}</span></>}
                   </div>
                   <h2 class="mt-3 font-heading text-h3 font-semibold text-text group-hover:text-primary transition-colors">
-                    <a href={`/es/blog/${post.id}`} class="after:absolute after:inset-0 relative">{post.data.title}</a>
+                    <a href={withBase(`/es/blog/${post.id}`)} class="after:absolute after:inset-0 relative">{post.data.title}</a>
                   </h2>
                   <p class="mt-2 flex-1 text-sm leading-relaxed text-text-muted">{post.data.description}</p>
                   <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">{text.blog.readMore}</span>

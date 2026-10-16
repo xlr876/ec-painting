@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Services pages', () => {
   test('English service groups use their matching photos', async ({ page }) => {
-    await page.goto('/services');
+    await page.goto('services');
 
     const images = page.locator('main img');
     await expect(images).toHaveCount(4);
@@ -17,7 +17,7 @@ test.describe('Services pages', () => {
   });
 
   test('Spanish service groups use their matching photos with localized alt text', async ({ page }) => {
-    await page.goto('/es/services');
+    await page.goto('es/services');
 
     const images = page.locator('main img');
     await expect(images).toHaveCount(4);
@@ -33,7 +33,7 @@ test.describe('Services pages', () => {
 
   test('alternates text and photo sides on desktop', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
-    await page.goto('/services');
+    await page.goto('services');
 
     const cards = page.locator('main article');
     for (const index of [0, 1, 2, 3]) {
@@ -51,7 +51,7 @@ test.describe('Services pages', () => {
 
   test('stacks service text before the photo on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto('/services');
+    await page.goto('services');
 
     const cards = page.locator('main article');
     for (const index of [0, 1, 2, 3]) {
