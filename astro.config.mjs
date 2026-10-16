@@ -5,6 +5,8 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 
 export default defineConfig({
+  site: 'https://xlr876.github.io',
+  base: '/ec-painting',
   output: 'static',
   i18n: {
     defaultLocale: 'en',
