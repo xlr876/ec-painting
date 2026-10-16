@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Banner from "../../components/Banner.astro";
+import { brand } from "../../config/brand";
+import { siteData } from "../../data/siteData";
+import { getTranslations } from "../../i18n/translations";
+
+const text = getTranslations('en');
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Contact ${brand.name} for a free estimate on apartment turnover services in Columbus, Ohio.`}
+>
+  <Header slot="header" />
+
+  <Banner title="Contact Us" />
+
+  <section class="py-section">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      <p class="mx-auto mb-10 max-w-2xl text-center text-text-muted leading-relaxed">
+        {text.contact.intro}
+      </p>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
+          <h2 class="font-heading text-lg font-semibold text-text">{siteData.name}</h2>
+          <p class="mt-1 text-text-muted">{siteData.contactName}</p>
+        </div>
+        <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
+          <h2 class="font-heading text-lg font-semibold text-text">Call Us</h2>
+          <a href={`tel:${siteData.phoneForTel}`} class="mt-1 block font-medium text-primary-light transition-colors hover:text-primary">{siteData.phoneFormatted}</a>
+        </div>
+        <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
+          <h2 class="font-heading text-lg font-semibold text-text">Email Us</h2>
+          <a href={`mailto:${siteData.email}`} class="mt-1 block font-medium text-primary-light transition-colors hover:text-primary">{siteData.email}</a>
+        </div>
+        <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
+          <h2 class="font-heading text-lg font-semibold text-text">{text.contact.serviceArea}</h2>
+          <p class="mt-1 text-text-muted">{siteData.serviceArea}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

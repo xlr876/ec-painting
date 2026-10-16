@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import Reviews from '../../components/Reviews.astro';
+import Gallery from '../../components/Gallery.astro';
+import CTA from '../../components/CTA.astro';
+import { getBrand } from '../../config/brand';
+import { getSiteData } from '../../data/localizedSiteData';
+
+const brand = getBrand('es');
+const siteData = getSiteData('es');
+---
+
+<BaseLayout
+  title={brand.name}
+  description={brand.description}
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'HomeAndConstructionBusiness',
+    name: siteData.name,
+    telephone: siteData.phoneForTel,
+    email: siteData.email,
+    areaServed: siteData.serviceArea,
+  }}
+>
+  <Header slot="header" />
+  <Hero />
+  <TrustBar />
+  {siteData.reviews.length > 0 && <Reviews />}
+  <Gallery />
+  <CTA />
+  <Footer slot="footer" />
+</BaseLayout>

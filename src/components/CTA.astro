@@ -1,0 +1,49 @@
+---
+import { getSiteData } from '../data/localizedSiteData';
+import { getTranslations } from '../i18n/translations';
+import { getLocale, localizePath } from '../i18n/routing';
+
+const locale = getLocale(Astro.currentLocale);
+const siteData = getSiteData(locale);
+const text = getTranslations(locale);
+
+interface Props {
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+
+const {
+  title = text.cta.title,
+  description = text.cta.description,
+  buttonText = text.cta.button,
+  buttonHref = localizePath('/contact', locale),
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-primary py-16 sm:py-20 lg:py-24">
+  <div class="mx-auto max-w-site px-4 text-center sm:px-6">
+    <h2 class="font-heading text-h2 font-bold uppercase text-primary-fg">
+      {title}
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl text-primary-fg/80 leading-relaxed">
+      {description}
+    </p>
+
+    <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a
+        href={buttonHref}
+        class="inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-8 py-3 text-base font-bold text-accent-fg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        {buttonText}
+      </a>
+      <a
+        href={`tel:${siteData.phoneForTel}`}
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-primary-fg/30 px-8 py-3 text-base font-bold text-primary-fg transition-colors hover:border-primary-fg hover:bg-primary-fg/10"
+      >
+        {text.cta.call}{" "}{siteData.phoneFormatted}
+      </a>
+    </div>
+  </div>
+</section>

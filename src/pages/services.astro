@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Banner from '../components/Banner.astro';
+import CTA from '../components/CTA.astro';
+import { Image } from 'astro:assets';
+import { brand } from '../config/brand';
+import { apartmentComplexImage, diningAreaImage, renovationImage, vanityImage } from '../config/images';
+import { siteData } from '../data/siteData';
+import { getTranslations } from '../i18n/translations';
+
+const { services } = siteData;
+const text = getTranslations('en');
+const serviceImages = [
+  { src: apartmentComplexImage, alt: 'Apartment complex exterior' },
+  { src: renovationImage, alt: 'Apartment interior under renovation' },
+  { src: vanityImage, alt: 'Bathroom vanity and fixtures' },
+  { src: diningAreaImage, alt: 'Finished apartment dining and living area' },
+];
+---
+
+<BaseLayout title={text.services.pageTitle} description={`${text.services.pageDescription} ${brand.name}.`}>
+  <Header slot="header" />
+
+  <Banner title={text.services.bannerTitle} />
+
+  <section class="py-section">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+        <h2 class="font-heading text-h2 font-bold uppercase text-text">{text.services.pageHeading}</h2>
+        <p class="mt-3 text-text-muted leading-relaxed">
+          {text.services.pageDescription}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-12">
+        {services.map((service, index) => (
+          <article class:list={[
+            "grid items-center gap-6 md:gap-10",
+            index % 2 === 0
+              ? "md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]"
+              : "md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]",
+          ]}>
+            <div class:list={[
+              "flex flex-col justify-center",
+              index % 2 === 0 ? "md:order-1" : "md:order-2",
+            ]}>
+              <h3 class="font-heading text-h3 font-semibold text-text">{service.title}</h3>
+              <p class="mt-2 text-text-muted leading-relaxed">{service.description}</p>
+            </div>
+            {serviceImages[index] && (
+              <Image
+                src={serviceImages[index].src}
+                alt={serviceImages[index].alt}
+                width={640}
+                height={427}
+                loading="lazy"
+                decoding="async"
+                class:list={[
+                  "mx-auto aspect-4/3 w-full max-w-sm rounded-lg object-cover md:max-w-none",
+                  index % 2 === 0 ? "md:order-2" : "md:order-1",
+                ]}
+              />
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+
+  <Footer slot="footer" />
+</BaseLayout>

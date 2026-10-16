@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Banner from '../../components/Banner.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { getBrand } from '../../config/brand';
+import { getTranslations } from '../../i18n/translations';
+import { termsOfServiceEs } from '../../data/termsEs';
+
+const brand = getBrand('es');
+const text = getTranslations('es');
+---
+
+<BaseLayout title={text.legal.termsTitle} description={`${text.legal.termsDescription} ${brand.name}.`}>
+  <Header slot="header" />
+  <Banner title={text.legal.termsTitle} />
+  <LegalPage effectiveDate={termsOfServiceEs.effectiveDate} sections={termsOfServiceEs.sections} />
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getSiteData } from '../data/localizedSiteData';
+import { getTranslations } from '../i18n/translations';
+import { getLocale, localizePath } from '../i18n/routing';
+import { aboutImage as localAboutImage } from '../config/images';
+
+const locale = getLocale(Astro.currentLocale);
+const siteData = getSiteData(locale);
+const text = getTranslations(locale);
+interface Props {
+  topper?: string;
+  heading?: string;
+  body?: string[];
+  benefits?: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  imageSrc?: ImageMetadata | string;
+  imageAlt?: string;
+}
+
+const {
+  topper = text.about.topper,
+  heading = text.about.heading,
+  body = siteData.about.story,
+  benefits = text.about.benefits,
+  ctaLabel = text.about.cta,
+  ctaHref = localizePath('/about', locale),
+  imageSrc = localAboutImage,
+  imageAlt = text.about.imageAlt,
+} = Astro.props;
+---
+
+<section class="py-section">
+  <div class:list={['mx-auto grid max-w-site grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:gap-14', imageSrc ? 'lg:grid-cols-2' : 'lg:grid-cols-1']}>
+
+    {imageSrc && <div class="overflow-hidden rounded-lg shadow-lg">
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        width={700}
+        height={525}
+        loading="lazy"
+        decoding="async"
+        class="size-full object-cover"
+      />
+    </div>}
+
+    <!-- Content -->
+    <div class:list={['space-y-5', !imageSrc && 'mx-auto max-w-3xl']}>
+      <span class="text-topper font-bold uppercase tracking-widest text-accent">{topper}</span>
+      <h2 class="font-heading text-h2 font-bold uppercase text-text">{heading}</h2>
+
+      {body.map((paragraph) => (
+        <p class="text-text-muted leading-relaxed">{paragraph}</p>
+      ))}
+
+      <!-- Benefits list -->
+      <ul class="space-y-3 pt-2" role="list">
+        {benefits.map((benefit) => (
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 shrink-0 text-accent font-bold" aria-hidden="true">&check;</span>
+            <span class="text-text">{benefit}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="pt-2">
+        <a
+          href={ctaHref}
+          class="inline-flex min-h-11 items-center gap-2 rounded-md bg-primary px-6 py-3 text-base font-bold text-primary-fg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          {ctaLabel}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

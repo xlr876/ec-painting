@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Banner from '../components/Banner.astro';
+import CTA from '../components/CTA.astro';
+import { Image } from 'astro:assets';
+import { siteData } from '../data/siteData';
+import { getTranslations } from '../i18n/translations';
+
+const { about } = siteData;
+const text = getTranslations('en');
+---
+
+<BaseLayout title={text.about.pageTitle} description={text.about.pageDescription}>
+  <Header slot="header" />
+
+  <Banner title={text.about.pageTitle} />
+
+  <section class="py-section">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <div class="space-y-5 text-center">
+        <span class="text-topper font-bold uppercase tracking-widest text-accent">{text.about.storyTopper}</span>
+        <h2 class="font-heading text-h2 font-bold uppercase text-text">{text.about.storyHeading}</h2>
+        {about.story.map((paragraph) => (
+          <p class="text-text-muted leading-relaxed">{paragraph}</p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {about.team.length > 0 && <section class="bg-surface py-section">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="mx-auto mb-10 max-w-2xl text-center">
+        <span class="text-topper font-bold uppercase tracking-widest text-accent">{text.about.teamTopper}</span>
+        <h2 class="mt-2 font-heading text-h2 font-bold uppercase text-text">{text.about.teamHeading}</h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {about.team.map(({ name, role, image }) => (
+          <div class="overflow-hidden rounded-lg bg-background shadow-sm">
+            <Image
+              src={image}
+              alt={name}
+              width={400}
+              height={400}
+              loading="lazy"
+              class="aspect-square w-full object-cover"
+            />
+            <div class="p-5">
+              <h3 class="font-heading text-lg font-semibold text-text">{name}</h3>
+              <p class="text-sm text-text-muted">{role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>}
+
+  <CTA />
+
+  <Footer slot="footer" />
+</BaseLayout>
