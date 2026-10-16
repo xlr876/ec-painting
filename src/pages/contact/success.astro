@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { getTranslations } from "../../i18n/translations";
+import { withBase } from "../../i18n/routing";
 
 const text = getTranslations('en');
 ---
@@ -37,7 +38,7 @@ const text = getTranslations('en');
         {text.success.body}
       </p>
       <a
-        href="/"
+        href={withBase('/')}
         class="mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-8 py-3 text-base font-bold text-primary-fg shadow-sm transition-opacity hover:opacity-90"
       >
         {text.success.home}

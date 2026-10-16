@@ -11,7 +11,7 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { getBrand } from '../config/brand';
 import { getSiteData } from '../data/localizedSiteData';
-import { getLocale, localizePath } from '../i18n/routing';
+import { getLocale, localizePath, withBase } from '../i18n/routing';
 
 interface Props {
   title?: string;
@@ -29,7 +29,7 @@ const spanishURL = Astro.site ? new URL(localizePath(Astro.url.pathname, 'es'), 
 const {
   title = brand.name,
   description = siteData.description,
-  image = '/og-image.png',
+  image = withBase('/og-image.png'),
   schema,
 } = Astro.props;
 
@@ -65,8 +65,8 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : unde
     <meta name="twitter:image"       content={image} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="icon" type="image/png" href={withBase('/favicon.png')} sizes="32x32" />
 
     <!-- Fonts -->
     <Font cssVariable="--font-display" preload />

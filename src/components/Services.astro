@@ -40,7 +40,7 @@ const {
       {services.map((service) => (
         <li>
           <a
-            href={service.href || '/services'}
+            href={service.href || localizePath('/services', locale)}
             class="group flex h-full cursor-pointer flex-col rounded-lg border border-border bg-background p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
           >
             <h3 class="font-heading text-h3 font-semibold text-text">{service.title}</h3>

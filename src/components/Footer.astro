@@ -2,7 +2,7 @@
 import { getBrand } from '../config/brand';
 import { getSiteData } from '../data/localizedSiteData';
 import { getTranslations } from '../i18n/translations';
-import { getLocale, localizePath } from '../i18n/routing';
+import { getLocale, localizePath, withBase } from '../i18n/routing';
 
 const locale = getLocale(Astro.currentLocale);
 const brand = getBrand(locale);
@@ -55,7 +55,7 @@ const { footerNav } = siteData;
           <ul class="mt-3 space-y-2">
             {col.links.map(({ label, href }) => (
               <li>
-                <a href={href} class="text-sm transition-colors hover:text-white">
+                <a href={withBase(href)} class="text-sm transition-colors hover:text-white">
                   {label}
                 </a>
               </li>

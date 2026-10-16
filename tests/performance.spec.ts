@@ -21,7 +21,7 @@ const THRESHOLDS = {
 
 test.describe('Performance / Speed Score', () => {
   test('TTFB and FCP are within budget', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('./');
 
     const metrics = await page.evaluate(() => {
       const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
@@ -46,7 +46,7 @@ test.describe('Performance / Speed Score', () => {
 
   test('LCP is within budget', async ({ page }) => {
     // Collect LCP via PerformanceObserver before navigation
-    await page.goto('/');
+    await page.goto('./');
 
     const lcp = await page.evaluate(
       () =>
@@ -71,7 +71,7 @@ test.describe('Performance / Speed Score', () => {
   });
 
   test('CLS is within budget', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('./');
     // Wait for layout to stabilise
     await page.waitForTimeout(1500);
 
@@ -98,7 +98,7 @@ test.describe('Performance / Speed Score', () => {
   });
 
   test('page has no render-blocking resources', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('./');
 
     const renderBlockingCount = await page.evaluate(() => {
       const resources = performance.getEntriesByType(
@@ -127,7 +127,7 @@ test.describe('Performance / Speed Score', () => {
       }
     });
 
-    await page.goto('/');
+    await page.goto('./');
     await page.waitForLoadState('networkidle');
 
     const totalKb = totalBytes / 1024;

@@ -4,7 +4,7 @@ import { getBrand } from "../config/brand";
 import { brandLogo } from "../config/images";
 import { getSiteData } from "../data/localizedSiteData";
 import { getTranslations } from "../i18n/translations";
-import { getLocale, localizePath } from "../i18n/routing";
+import { getLocale, localizePath, withBase, stripBase } from "../i18n/routing";
 
 const locale = getLocale(Astro.currentLocale);
 const brand = getBrand(locale);
@@ -13,7 +13,7 @@ const text = getTranslations(locale);
 const { nav } = siteData;
 const strip = (p: string) =>
   p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p;
-const currentPath = strip(Astro.url.pathname);
+const currentPath = strip(stripBase(Astro.url.pathname));
 ---
 
 <header
@@ -54,7 +54,7 @@ const currentPath = strip(Astro.url.pathname);
             (href !== "/" && currentPath.startsWith(href));
           return (
             <a
-              href={href}
+              href={withBase(href)}
               aria-current={isActive ? "page" : undefined}
               class:list={[
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
@@ -129,7 +129,7 @@ const currentPath = strip(Astro.url.pathname);
               (href !== "/" && currentPath.startsWith(href));
             return (
               <a
-                href={href}
+                href={withBase(href)}
                 class:list={[
                   "rounded-md px-3 py-3 text-base font-medium transition-colors",
                   isActive
