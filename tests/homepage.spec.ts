@@ -34,4 +34,14 @@ test.describe('Homepage', () => {
     await expect(page).toHaveURL(/\/contact\/?$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   });
+
+  test('desktop navigation follows the requested order in both languages', async ({ page }) => {
+    await page.goto('./');
+    await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link'))
+      .toHaveText(['Home', 'Services', 'Contact', 'About']);
+
+    await page.goto('es/');
+    await expect(page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link'))
+      .toHaveText(['Inicio', 'Servicios', 'Contacto', 'Quiénes somos']);
+  });
 });

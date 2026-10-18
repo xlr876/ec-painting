@@ -17,26 +17,26 @@ const text = getTranslations('es');
   <Banner title={text.contact.bannerTitle} />
 
   <section class="py-section">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6">
-    <p class="mx-auto mb-10 max-w-2xl text-center text-text-muted leading-relaxed">{text.contact.intro}</p>
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
-        <h2 class="font-heading text-lg font-semibold text-text">{siteData.name}</h2>
-        <p class="mt-1 text-text-muted">{siteData.contactName}</p>
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <div class="space-y-5 text-center">
+        <h2 class="font-heading text-h2 font-bold uppercase text-text">{siteData.name}</h2>
+        <p class="text-text-muted">{siteData.contactName}</p>
+        <p class="text-text-muted leading-relaxed">{text.contact.intro}</p>
+        <div class="space-y-3 text-text-muted">
+          <p>
+            <span class="font-semibold text-text">{text.contact.callUs}:</span>
+            <a href={`tel:${siteData.phoneForTel}`} class="font-medium text-primary-light transition-colors hover:text-primary">{siteData.phoneFormatted}</a>
+          </p>
+          <p>
+            <span class="font-semibold text-text">{text.contact.emailUs}:</span>
+            <a href={`mailto:${siteData.email}`} class="font-medium text-primary-light transition-colors hover:text-primary">{siteData.email}</a>
+          </p>
+          <p>
+            <span class="font-semibold text-text">{text.contact.serviceArea}:</span>
+            {siteData.serviceArea}
+          </p>
+        </div>
       </div>
-      <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
-        <h2 class="font-heading text-lg font-semibold text-text">{text.contact.callUs}</h2>
-        <a href={`tel:${siteData.phoneForTel}`} class="mt-1 block font-medium text-primary-light transition-colors hover:text-primary">{siteData.phoneFormatted}</a>
-      </div>
-      <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
-        <h2 class="font-heading text-lg font-semibold text-text">{text.contact.emailUs}</h2>
-        <a href={`mailto:${siteData.email}`} class="mt-1 block font-medium text-primary-light transition-colors hover:text-primary">{siteData.email}</a>
-      </div>
-      <div class="rounded-lg border border-border bg-background p-6 shadow-sm">
-        <h2 class="font-heading text-lg font-semibold text-text">{text.contact.serviceArea}</h2>
-        <p class="mt-1 text-text-muted">{siteData.serviceArea}</p>
-      </div>
-    </div>
     </div>
   </section>
 

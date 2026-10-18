@@ -39,9 +39,9 @@ export const siteData = {
   // ── Navigation (add, remove, or reorder as needed) ───────────────────────
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
     { label: 'Services', href: '/services' },
     { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/about' },
   ],
 
   // ── Services ─────────────────────────────────────────────────────────────

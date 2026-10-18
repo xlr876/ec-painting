@@ -9,9 +9,9 @@ export const siteDataEs = {
   serviceArea: 'Columbus, Ohio y comunidades cercanas',
   nav: [
     { label: 'Inicio', href: '/es/' },
-    { label: 'Quiénes somos', href: '/es/about' },
     { label: 'Servicios', href: '/es/services' },
     { label: 'Contacto', href: '/es/contact' },
+    { label: 'Quiénes somos', href: '/es/about' },
   ],
   services: [
     {
