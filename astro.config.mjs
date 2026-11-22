@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 
 export default defineConfig({
-  site: 'https://steady-kelpie-b5af55.netlify.app',
+  site: 'https://lennyspaintingllc.com',
   base: '/',
   output: 'static',
   i18n: {
